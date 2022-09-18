@@ -1,0 +1,65 @@
+.Counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: auto;
+}
+
+.Add {
+    width: auto;
+    text-decoration: none;
+    border-radius: 25;
+    margin: 0 30px;
+    width: auto;
+    padding: 12px;
+    font-size: 15px;
+    background: maroon;
+    border-radius: 8px;
+    display: flex;
+    align-self: center;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.Number {
+    font-size: 18px;
+    padding: 20px;
+    margin: 0;
+    order: 1;
+}
+
+.Controls {
+    display: flex;
+    justify-content: center;
+}
+.contador {
+    display: flex;
+    justify-content: center;
+    color: black;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border-color);
+    font-size: 1.6rem;
+    transition: all 250ms ease-out;
+}
+
+.contador:hover {
+    border: white;
+    color: black;
+    background-color: brown;
+}
+
+.contador[disabled] {
+    color: transparent;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+}
