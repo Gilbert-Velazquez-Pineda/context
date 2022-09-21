@@ -24,7 +24,7 @@ const NavBar = () => {
                     <Link className="nav-link" to='/SwapiContainer' >SweetApi</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to='/CartWidget' >
+                    <Link className="nav-link" to='/Cart' >
                     <CartWidget/>
                     </Link>
                   </li>
