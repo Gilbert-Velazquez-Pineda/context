@@ -1,35 +1,27 @@
-import './ItemCount.css'
-import { useState } from 'react'
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
-const ItemCount = ({stock, initial = 1, onAdd})=> {
-    const [quantity, setQuantity] = useState(stock>0 ? initial : stock);
+
+
+function ItemCount ({stock, onAdd}) {
     
-    const increment = () => {
-        if(quantity < stock) {
-            setQuantity(quantity+1)
-            console.log(quantity)
-        }
-    }
+    const [quantity, setquantity,] = useState (1)
+    
+    return (
+        <>
+        <div class="flex items-stretch">
+        <button className="btn btn-dark mx-3" onClick={() => setquantity(quantity + 1)} disabled={quantity === stock}>+</button>
+        <h5 className='py-1'> Cantidad: {quantity} </h5>
+        <button className="btn btn-dark mx-3"  onClick={() => setquantity(quantity - 1)} disabled={quantity === 0}>-</button>
+       </div>
+        
+       <div class="flex items-center">
+       <Button className="btn btn-primary mx-3 my-2" onClick={() => onAdd(quantity)}  disabled={quantity === 0}>Comprar</Button>
+       <button className="btn btn-danger mx-3 my-2" onClick={() => setquantity(0)}>Limpiar</button>
+       </div>
+        </>
+    );
 
-    const decrement = () => {
-        if(quantity > 1) {
-            setQuantity(quantity - 1)
-            console.log(quantity)
-        }     
-    }
-
-    return(
-        <div className='Counter'>          
-                <div className='Controls'>
-                    <button className="Button contador" onClick={decrement} disabled = {quantity === 1}>-</button>
-                    <h4 className='Number'>{quantity}</h4>
-                    <button className="Button contador" onClick={increment} disabled = {quantity === stock}>+</button>
-                </div>
-                <div>
-                    <button className="Button Add" onClick={() => onAdd(quantity)}>Agregar al carrito</button>
-                </div>
-        </div>
-    )
 
 }
 export default ItemCount

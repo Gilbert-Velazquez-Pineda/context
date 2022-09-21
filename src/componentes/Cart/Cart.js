@@ -1,8 +1,8 @@
 import CartContext from "../Context/CartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Table from 'react-bootstrap/Table'
-import './Cart.css'
+
+
 
 const CartDetail = () =>{
     const {cart, clearCart, removeItem} = useContext(CartContext)
@@ -11,45 +11,68 @@ const CartDetail = () =>{
         return acc + sum.total
     }, 0)
 
-    console.log(total)
+    
     return(
-        <div className='cart'>
-            <h1>{cart.length === 0 ? 'Tu Carrito está vacio' :  'Tu carrito'}</h1>
-            
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th/>
-                    <th>Productos</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cart.map((u) => {
-                        return (
-                        <tr key={u.id}>
-                        <td>${u.precio}</td>
-                        <td>{u.quantity}</td>
-                        <td>${u.total}</td>
-                        </tr>)
-                    })}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    <td colSpan={4}>Total: ${total}</td>
-                    </tr>
-                </tbody>
-            </Table>
-            <div className='containerButton'>
+      
+<div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="py-3 px-6">
+                    Nombre del producto
+                </th>
+                <th scope="col" className="py-3 px-6">
+                    Precio unitario
+                </th>
+                <th scope="col" className="py-3 px-6">
+                    Cantidad
+                </th>
+                <th scope="col" className="py-3 px-6">
+                    SubTotal
+                </th>
+                <th scope="col" className="py-3 px-6">
+                    <span className="sr-only">Eliminar</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {cart.map((prod) => (
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-gray-500">
+                    {prod.titulo}
+                </th>
+                <td className="py-4 px-6">
+                    {prod.precio}
+                </td>
+                <td className="py-4 px-6">
+                    {prod.quantity}
+                </td>
+                <td className="py-4 px-6">
+                    {prod.total}
+                </td>
+                <td className="py-4 px-6 text-right">
+                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={removeItem}>Eliminar</button>
+                </td>
+                
+            </tr>
+           ))} 
+        </tbody>
+        <tfoot>
+            <tr className="font-semibold text-gray-900 dark:text-dark">
+                <td></td>
+                <td></td>
+                <th scope="row" className="py-3 px-6 text-right ">Total: </th>
+                <td className="py-3 px-6 text-left"> {total}</td>
+            </tr>
+        </tfoot>
+    </table>
+    
+    <Link className="btn btn-outline-primary btn-lg mx-5 my-3" to='/checkout'>Ir a pagar</Link>
+    <button type="button" onClick={clearCart} className="btn btn-outline-secondary btn-lg ">Vaciar Carrito</button>
+    <Link to='/ItemListContainer' variant="secondary" className='btn btn-outline-info  btn-lg mx-5'>Seguir Comprando</Link>
 
-                {cart.length !== 0 && <button className='col-auto button' onClick={clearCart}>Vaciar Carrito</button>}
-                {cart.length !== 0 && <button className='col-auto button' ><Link to='/checkout'>Pagar</Link></button>}
-            </div>
-        </div>
+</div>
+
     )
 }
 

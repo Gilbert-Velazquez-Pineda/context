@@ -6,11 +6,13 @@ const CartContext = createContext()
 export const CartContextProvider = ({ children }) => {
     const {setNotification} = useContext(AlertContext)
     const [cart, setCart] = useState([])
-    console.log(cart)
+
 
     const addItem = (productToAdd) => {
+
         if(!isInCart(productToAdd.id)) {
             setCart([...cart, productToAdd])
+
         } else {
             const cartUpdated = cart.map(prod => {
                 if(prod.id === productToAdd.id) {
@@ -28,25 +30,25 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
+console.log(cart);
+    
+    //vaciar carrito
     const clearCart = () => {
         setNotification(`Tu carrito se ha vaciado`)
         setCart([])
     }
 
     const removeItem = (id) => {
-        const prod = cart.find(u => u.id === id)
-        setNotification(`Cuidado:, Removiste ${prod.quantity} ${prod.titulo}`)
-        const newCartWithoutProduct = cart.filter(prod => prod.id !== id)
-        setCart(newCartWithoutProduct)
+        const newCartWithoutProduct = cart.filter((prod) => prod.id !== id)
+        return setCart(newCartWithoutProduct)
     }
 
     const isInCart = (id) => {
-        return cart.some(prod => prod.id === id)
+        return cart.some((prod) => prod.id === id)
     }
 
     const getQuantity = () => {
         let accu = 0
-
         cart.forEach(prod => {
         accu += prod.quantity
         })
@@ -55,7 +57,6 @@ export const CartContextProvider = ({ children }) => {
 
     const getTotal = () => {
         let accu = 0
-
         cart.forEach(prod => {
         accu += prod.quantity * prod.precio
         })

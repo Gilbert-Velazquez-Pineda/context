@@ -1,6 +1,5 @@
-import Button from 'react-bootstrap/Button';
+/* import Button from 'react-bootstrap/Button'; */
 import Card from 'react-bootstrap/Card';
-import './ItemDetail.css'
 import ItemCount from '../paginas/ItemCount';
 import {useState, useContext} from 'react';
 import CartContext from '../Context/CartContext';
@@ -21,6 +20,7 @@ const ItemDetail = ( {id, imagen, titulo, precio, stock} ) => {
       const productToAdd = {
           id, titulo, precio, quantity:Number(quantity), total:(precio*quantity)
       }
+      
       if(quantity<=0){
           setNotification('danger',`Sorry! We don't have stock`)
       } else{
@@ -30,38 +30,33 @@ const ItemDetail = ( {id, imagen, titulo, precio, stock} ) => {
   }
 
   const productQuantity = getProductQuantity(id)
-
+  
+ 
     return (
-      <article className="CardItemDetalle">
-      <header className="Header">
-          <h2 className="ItemHeader">
-              {titulo}
-          </h2>
-      </header>
-      <picture>
-          <img src={imagen} alt={titulo} className="ItemImgDetalle"/>
-      </picture>
-      <section>
-          <p className="InfoDetalle">
-              Categoria: {id}
-          </p>
-          <h6 className="InfoDetalle">
-              Descripción: {stock}
-              </h6>
-          <p className="InfoDetalle">
-              Precio: ${precio} mxn
-          </p>
-      </section>           
-      <footer className='ItemFooter'>
-          {
+        <>
+        <div className="grid place-items-center ">  
+        <Card style={{ width: '18rem'}} >
+          <Card.Img variant="top" src={imagen} />
+          <Card.Body>
+            <Card.Title className='text-center' >{titulo}</Card.Title>
+            <Card.Body className='text-center'><strong>Precio: ${precio} MXN</strong></Card.Body>
+            {
               quantityToAdd === 0 ? (
                   <ItemCount onAdd={handleOnAdd} stock={stock} initial={productQuantity}/>
               ) : (
-                  <Link to='/cart'>Finalizar compra</Link>
+                  <Link className='btn btn-primary' to='/cart'>Ir A Carrito</Link>
               )
           }
-      </footer>
-  </article>
+            <Card.Text>
+               Stock: {stock} pzas
+            </Card.Text>
+            <Link to='/ItemListContainer' variant="secondary" className='btn btn-outline-info absolute bottom-2 right-1 h-10 w-30'>Seguir Comprando</Link>
+          </Card.Body>
+      </Card>
+     
+      </div>
+     
+      </>       
     )
   }
   export default ItemDetail
