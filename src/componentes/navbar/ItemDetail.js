@@ -10,7 +10,7 @@ const ItemDetail = () => {
 
   useEffect(() => {
     getItem().then( data => {
-        ( console.log(data))
+        
         if (data) {
             setItem(data)
         }

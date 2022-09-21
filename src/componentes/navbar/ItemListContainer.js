@@ -7,7 +7,6 @@ function ItemListContainer() {
 
     const [items, setItem] = useState([])
    
-
     useEffect(() => {
         fetch ( 'catalago.json')
         .then (response =>  response.json() )

@@ -1,48 +1,60 @@
-import { useState, createContext, useContext} from 'react'
-import AlertContext  from './Alert';
+import { useState, createContext} from 'react'
+import Swal from 'sweetalert2';
 
 const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
-    const {setNotification} = useContext(AlertContext)
+    
     const [cart, setCart] = useState([])
 
 
     const addItem = (productToAdd) => {
 
-        if(!isInCart(productToAdd.id)) {
-            setCart([...cart, productToAdd])
-
+        if(isInCart(productToAdd.id)) {
+            return Swal.fire("El articulo ya esta en el carrito")
+            
         } else {
-            const cartUpdated = cart.map(prod => {
-                if(prod.id === productToAdd.id) {
-                    const productUpdated = {
-                        ...prod,
-                        quantity: productToAdd.quantity
-                    }
-                    return productUpdated
-                } else {
-                    return prod
-                }
-            })
-
-            setCart(cartUpdated)
+            setCart([...cart, productToAdd])
+            Swal.fire(`Se añadio  al Carrito`)
         }
     }
 
-console.log(cart);
+console.log();
     
     //vaciar carrito
     const clearCart = () => {
-        setNotification(`Tu carrito se ha vaciado`)
+        Swal.fire(`Tu carrito se ha vaciado`)
         setCart([])
     }
 
+    //remover solo 1 item
     const removeItem = (id) => {
-        const newCartWithoutProduct = cart.filter((prod) => prod.id !== id)
-        return setCart(newCartWithoutProduct)
+        Swal.fire({
+            title: '¿Esta Seguro de eliminar el articulo?',
+            text: "Esto no se podra revertir!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Borrar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Borrado!',
+                'El Articulo A Sido Borrado.',
+                'success'
+              )
+              const remove = cart.filter((prod) => prod.id !== id)
+        
+        return setCart(remove)
+            }
+          })
+        
     }
 
+   
+
+    //comprobar si esta ya el item en el carrito
     const isInCart = (id) => {
         return cart.some((prod) => prod.id === id)
     }
@@ -64,9 +76,9 @@ console.log(cart);
         return accu
     }
 
+
     const getProductQuantity = (id) => {
         const product = cart.find(prod => prod.id === id)
-
         return product?.quantity
     }
 

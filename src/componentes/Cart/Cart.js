@@ -42,16 +42,16 @@ const CartDetail = () =>{
                     {prod.titulo}
                 </th>
                 <td className="py-4 px-6">
-                    {prod.precio}
+                    ${prod.precio}
                 </td>
                 <td className="py-4 px-6">
                     {prod.quantity}
                 </td>
                 <td className="py-4 px-6">
-                    {prod.total}
+                    ${prod.total}
                 </td>
                 <td className="py-4 px-6 text-right">
-                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={removeItem}>Eliminar</button>
+                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => removeItem(prod.id) } id={prod.id}>Eliminar</button>
                 </td>
                 
             </tr>
@@ -62,12 +62,12 @@ const CartDetail = () =>{
                 <td></td>
                 <td></td>
                 <th scope="row" className="py-3 px-6 text-right ">Total: </th>
-                <td className="py-3 px-6 text-left"> {total}</td>
+                <td className="py-3 px-6 text-left"> ${total}</td>
             </tr>
         </tfoot>
     </table>
     
-    <Link className="btn btn-outline-primary btn-lg mx-5 my-3" to='/checkout'>Ir a pagar</Link>
+    <Link className="btn btn-outline-primary btn-lg mx-5 my-3" to='/'>Ir a pagar</Link>
     <button type="button" onClick={clearCart} className="btn btn-outline-secondary btn-lg ">Vaciar Carrito</button>
     <Link to='/ItemListContainer' variant="secondary" className='btn btn-outline-info  btn-lg mx-5'>Seguir Comprando</Link>
 

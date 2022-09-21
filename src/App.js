@@ -8,7 +8,6 @@ import SwapiContainer from './componentes/swapi/SwapiContainer';
 import ItemListContainer from './componentes/navbar/ItemListContainer'
 import CartWidget from './componentes/navbar/CartWidget';
 import { CartContextProvider } from './componentes/Context/CartContext';
-import { AlertProvider } from './componentes/Context/Alert';
 import CartDetail from './componentes/Cart/Cart'
 
 
@@ -18,7 +17,6 @@ function App() {
   //DOM
   return (
     <div className="App">
-      <AlertProvider>
       <CartContextProvider>
       <Router>
           <NavBar/>
@@ -32,7 +30,6 @@ function App() {
           </Routes>
        </Router>
        </CartContextProvider>
-       </AlertProvider>
     </div>
   );
 }
