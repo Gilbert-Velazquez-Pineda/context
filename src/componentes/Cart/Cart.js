@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
+
 const CartDetail = () =>{
     const {cart, clearCart, removeItem} = useContext(CartContext)
 
@@ -11,8 +12,9 @@ const CartDetail = () =>{
         return acc + sum.total
     }, 0)
 
-    
+        
     return(
+        
       
 <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -35,6 +37,7 @@ const CartDetail = () =>{
                 </th>
             </tr>
         </thead>
+        
         <tbody>
             {cart.map((prod) => (
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -53,10 +56,10 @@ const CartDetail = () =>{
                 <td className="py-4 px-6 text-right">
                     <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => removeItem(prod.id) } id={prod.id}>Eliminar</button>
                 </td>
-                
             </tr>
            ))} 
         </tbody>
+
         <tfoot>
             <tr className="font-semibold text-gray-900 dark:text-dark">
                 <td></td>
@@ -66,7 +69,7 @@ const CartDetail = () =>{
             </tr>
         </tfoot>
     </table>
-    
+    <h1 className="text-center">{cart.length === 0 ? 'Tu Carrito está vacio' :  ''}</h1>
     <Link className="btn btn-outline-primary btn-lg mx-5 my-3" to='/'>Ir a pagar</Link>
     <button type="button" onClick={clearCart} className="btn btn-outline-secondary btn-lg ">Vaciar Carrito</button>
     <Link to='/ItemListContainer' variant="secondary" className='btn btn-outline-info  btn-lg mx-5'>Seguir Comprando</Link>

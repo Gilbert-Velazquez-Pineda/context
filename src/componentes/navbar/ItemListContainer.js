@@ -17,7 +17,7 @@ function ItemListContainer() {
     }, [])
 
     return (
-      <div className="bg-white">
+      <div className="bg-neutral-300">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">Catalago de productos</h2>
 

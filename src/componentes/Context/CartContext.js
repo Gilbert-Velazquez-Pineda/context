@@ -19,7 +19,7 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
-console.log();
+
     
     //vaciar carrito
     const clearCart = () => {
