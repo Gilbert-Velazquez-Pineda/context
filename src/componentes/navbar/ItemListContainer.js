@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
-
-
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 function ItemListContainer() {
 
-    const [items, setItem] = useState([])
-   
-    useEffect(() => {
-        fetch ( 'catalago.json')
-        .then (response =>  response.json() )
-        .then (data => {
-             setItem (data) 
-       })
-        
-    }, [])
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+  console.log(items);
+
+  const getProducts = () => {
+    const db = getFirestore()
+    const itemCollection = collection( db, 'products' )
+    getDocs( itemCollection ).then( snapshot => {
+        setItems( snapshot.docs.map( d => ({id: d.id, ...d.data()}) ) );
+    })
+  }
+
 
     return (
       <div className="bg-neutral-300">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">Catalago de productos</h2>
-
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {items.map((item) => (
             <div key={item.id} className="group relative">

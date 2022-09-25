@@ -24,6 +24,9 @@ const NavBar = () => {
                     <Link className="nav-link" to='/SwapiContainer' >SweetApi</Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link" to='/ProductsContainer' >Prueba productos</Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to='/Cart' >
                     <CartWidget/>
                     </Link>

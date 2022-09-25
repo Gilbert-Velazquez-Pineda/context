@@ -9,7 +9,25 @@ import ItemListContainer from './componentes/navbar/ItemListContainer'
 import CartWidget from './componentes/navbar/CartWidget';
 import { CartContextProvider } from './componentes/Context/CartContext';
 import CartDetail from './componentes/Cart/Cart'
+import ProductsContainter from './componentes/firebase/ProductsContainter';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBcB840Fef_I0HeDLDmRYb0lms3rWr_EQ4",
+  authDomain: "react-5c2dc.firebaseapp.com",
+  projectId: "react-5c2dc",
+  storageBucket: "react-5c2dc.appspot.com",
+  messagingSenderId: "555446388211",
+  appId: "1:555446388211:web:32621d0b385546ab953e86"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 
@@ -25,6 +43,7 @@ function App() {
             <Route  path='/:id' element={<ItemDetail/>}/>
             <Route exact path="ItemListContainer" element={<ItemListContainer/>}/>
             <Route  path="/SwapiContainer" element={<SwapiContainer/>}/>
+            <Route  path="/ProductsContainer" element={<ProductsContainter/>}/>
             <Route  path='Cart' element={<CartDetail/>}/>
             <Route  path="/CartWidget" element={<CartWidget/>}/>
           </Routes>
